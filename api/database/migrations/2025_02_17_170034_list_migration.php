@@ -11,14 +11,14 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('uploadlabels', function (Blueprint $table) {
+        Schema::create('lists', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('upload_id')->unsigned();
-            $table->integer('label_id')->unsigned();
+            $table->integer('user_id')->unsigned();
+            $table->integer('uploads_id')->unsigned();
             $table->timestamps();
 
-            $table->foreign('upload_id')->references('id')->on('uploads')->onDelete('cascade');;
-            $table->foreign('label_id')->references('id')->on('labels');
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');;
+            $table->foreign('uploads_id')->references('id')->on('uploads')->onDelete('cascade');;
         });
     }
 

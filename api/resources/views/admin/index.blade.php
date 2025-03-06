@@ -1,3 +1,7 @@
+@php
+ $p=0;   
+@endphp
+
 @extends('admin.layouts.main')
 
 @section('contenido')

@@ -15,10 +15,10 @@ return new class extends Migration
             $table->increments('id');
             $table->integer('uploads_id')->unsigned();
             $table->string('title');
-            $table->string('url');
+            $table->string('slug');
             $table->timestamps();
 
-            $table->foreign('uploads_id')->references('id')->on('uploads');
+            $table->foreign('uploads_id')->references('id')->on('uploads')->onDelete('cascade');;
         });
     }
 

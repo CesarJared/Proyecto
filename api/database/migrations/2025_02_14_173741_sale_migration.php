@@ -11,14 +11,12 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('uploadlabels', function (Blueprint $table) {
+        Schema:: create('sales', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('upload_id')->unsigned();
-            $table->integer('label_id')->unsigned();
+            $table->string('code');
+            $table->float('sale');
             $table->timestamps();
 
-            $table->foreign('upload_id')->references('id')->on('uploads')->onDelete('cascade');;
-            $table->foreign('label_id')->references('id')->on('labels');
         });
     }
 

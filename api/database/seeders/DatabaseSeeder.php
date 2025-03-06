@@ -2,6 +2,8 @@
 
 namespace Database\Seeders;
 
+use App\Models\Uploads;
+use App\Models\UploadsLabels;
 use App\Models\User;
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
@@ -13,11 +15,13 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        // User::factory(10)->create();
-
-        User::factory()->create([
-            'name' => 'Test User',
-            'email' => 'test@example.com',
-        ]);
+        $this->call(UserSeeders::class);
+        $this->call(CategorysSeeder::class);
+        $this->call(SaleSeeder::class);
+        $this->call(labelSeeder::class);
+        $this->call(UploadSeeder::class);
+        $this->call(VideoSeeder::class);
+        $this->call(uploadlabelSeeder::class);
+        $this->call(ListSeeder::class);
     }
 }
