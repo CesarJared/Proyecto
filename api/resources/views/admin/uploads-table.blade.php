@@ -43,8 +43,8 @@
         @foreach ($uploads as $u)
         <tr>
           <th scope="row">{{ $u->id }}</th>
-          <td>{{$u->user_id}}</td>
-          <td>{{$u->category_id}}</td>
+          <td>{{$u->user->name}}</td>
+          <td>{{$u->category->category}}</td>
           <td>{{$u->img}}</td>
           <td>{{$u->title}}</td>
           <td>{{$u->description}}</td>

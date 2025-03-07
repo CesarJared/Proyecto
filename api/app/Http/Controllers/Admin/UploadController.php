@@ -10,7 +10,7 @@ use App\Models\Uploads;
 class UploadController extends Controller
 {
     public function uploadInfo(){
-        $uploads = Uploads::all();
+        $uploads = Uploads::with('user','category')->get();
         $categories = Categorys::all();
         return view('admin.uploads-table')->with('uploads', $uploads)->with('categories', $categories);
     }

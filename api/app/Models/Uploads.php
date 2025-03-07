@@ -14,4 +14,12 @@ class Uploads extends Model
         'description',
         'slug'
     ];
+
+    public function user(){
+        return $this->hasOne(User::class,'id','user_id');
+    }
+
+    public function category(){
+        return $this->hasOne(Categorys::class,'id','category_id');
+    }
 }
