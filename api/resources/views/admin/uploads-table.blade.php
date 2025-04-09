@@ -45,7 +45,7 @@
           <th scope="row">{{ $u->id }}</th>
           <td>{{$u->user->name}}</td>
           <td>{{$u->category->category}}</td>
-          <td>{{$u->img}}</td>
+          <td><img src="{{asset('uploads/img/'.$u->img)}}" style="width: 5rem;"></td>
           <td>{{$u->title}}</td>
           <td>{{$u->description}}</td>
           <td>{{$u->slug}}</td>
@@ -107,12 +107,12 @@
               </div>
               <div class="mb-3">
                 <label for="">Video(s)</label>
-                <input type="file" class="form-control" name="video">
+                <input type="file" class="form-control" name="video[]" multiple>
               </div>
           </div>
           <div class="modal-footer">
             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
-            <button type="submit" class="btn btn-primary">Guardar</button>
+            <button type="submit" id="btnInsert" class="btn btn-primary">Guardar</button>
           </div>
         </form>
       </div>
@@ -214,6 +214,9 @@
          });
      }
   }
+
+  
+
 </script>
 
 @endsection

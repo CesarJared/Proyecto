@@ -16,7 +16,7 @@ class uploadSeeder extends Seeder
         DB::table('uploads')->insert([
             'user_id' => 1,
             'category_id' => 1,
-            'img' => 'uploads/1.jpg',
+            'img' => 'Default.svg',
             'title' => 'Pelicula 1',
             'description' => 'description-1',
             'slug' => 'pelicula-1',
@@ -25,7 +25,7 @@ class uploadSeeder extends Seeder
         DB::table('uploads')->insert([
             'user_id' => 1,
             'category_id' => 1,
-            'img' => 'uploads/2.jpg',
+            'img' => 'Default.svg',
             'title' => 'Pelicula 2',
             'description' => 'description-2',
             'slug' => 'pelicula-2',
@@ -34,7 +34,7 @@ class uploadSeeder extends Seeder
         DB::table('uploads')->insert([
             'user_id' => 1,
             'category_id' => 1,
-            'img' => 'uploads/3.jpg',
+            'img' => 'Default.svg',
             'title' => 'Pelicula 3',
             'description' => 'description-3',
             'slug' => 'pelicula-3',

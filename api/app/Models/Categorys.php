@@ -7,7 +7,8 @@ use Illuminate\Database\Eloquent\Model;
 class Categorys extends Model
 {
     protected $fillable = [
-        'name',
+        'category',
+        'description',
         'description',
     ];
 }
