@@ -8,44 +8,8 @@
                         <div class="card-body p-4">
                             <h3 class="text-center mb-4">Payment Details</h3>
                             <form>
-                                <!-- Card Number -->
-                                <div class="form-group mb-3">
-                                    <label for="cardNumber" class="form-label">Card Number</label>
-                                    <input type="text" id="cardNumber" class="form-control" v-model="cardNumber" placeholder="Enter card number" required />
-                                </div>
-                                
-                                <!-- Expiry Date -->
-                                <div class="form-row">
-                                    <div class="col-md-6">
-                                        <div class="form-group mb-3">
-                                            <label for="expiryDate" class="form-label">Expiry Date</label>
-                                            <input type="month" id="expiryDate" class="form-control" v-model="expiryDate" required />
-                                        </div>
-                                    </div>
-                                    
-                                    <!-- CVV -->
-                                    <div class="col-md-6">
-                                        <div class="form-group mb-3">
-                                            <label for="cvv" class="form-label">CVV</label>
-                                            <input type="password" id="cvv" class="form-control" v-model="cvv" placeholder="XXX" required />
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <!-- Billing Address -->
-                                <div class="form-group mb-3">
-                                    <label for="billingAddress" class="form-label">Billing Address</label>
-                                    <input type="text" id="billingAddress" class="form-control" v-model="billingAddress" placeholder="Enter billing address" required />
-                                </div>
-                                
-                                <!-- Amount -->
-                                <div class="form-group mb-3">
-                                    <label for="amount" class="form-label">Total Amount</label>
-                                    <input type="text" id="amount" class="form-control" v-model="amount" disabled />
-                                </div>
-
                                 <!-- Submit Button -->
-                                <router-link :to="'/'" class="btn btn-dark w-100 mt-3">Pay Now</router-link>
+                                <div id="btnPayPal"></div>
                             </form>
                         </div>
                     </div> 
@@ -59,11 +23,53 @@
 <script>
     import HeaderComponent from '@/shared/HeaderComponent.vue';
     import FooterComponent from '@/shared/FooterComponent.vue';
+    import { loadScript } from '@paypal/paypal-js';
+    import router from '@/router';
+
     export default {
         name: 'PayComponent',
         components: {
             HeaderComponent,
             FooterComponent
+        },
+        mounted() {
+            this.pagar();
+        },
+        methods:{
+            pagar(){
+                loadScript({
+                    'clientId':'AauWeV028dEoKplMZglyQeSxFvlVDRtatRU_obqwvIqBn2osDAyUDdgGlkMbK0xZ1t8tBp-3Nc6h-oDC',
+                    'currency': 'MXN',
+                }).then((paypal)=>{
+                    paypal.Buttons({
+                        createOrder:this.createOrder,
+                        onApprove:this.onApprove,
+                    }).render('#btnPayPal')
+                })
+            },
+            createOrder(data, actions){
+                console.log('createOrder', data, actions);
+                return actions.order.create({
+                    purchase_units:[{
+                        amount:{
+                            value: '100.00',
+                        },
+                    }]
+                }).then(function(orderId){
+                    console.log('orderId', orderId);
+                    return orderId;
+                })
+            },
+            onApprove(data, actions){
+                console.log('onApprove', data, actions);
+                alert('Payment successful!');
+                return actions.order.capture().then(function(details){
+                    console.log('Transaction completed by', details.payer.name.given_name);
+                    alert('Transaction completed by ' + details.payer.name.given_name);
+                    router.push('/')
+                })
+            }
+
         }
     }
 </script>

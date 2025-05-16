@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\Subs;
 use App\Models\Uploads;
 use App\Models\UploadsLabels;
 use App\Models\User;
@@ -23,5 +24,6 @@ class DatabaseSeeder extends Seeder
         $this->call(VideoSeeder::class);
         $this->call(uploadlabelSeeder::class);
         $this->call(ListSeeder::class);
+        $this->call(SubSeeder::class);
     }
 }

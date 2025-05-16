@@ -3,8 +3,10 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
+use App\Models\Subs;
 use Illuminate\Http\Request;
 use App\Models\User;
+use Illuminate\Support\Facades\DB;
 
 class UsersController extends Controller
 {
@@ -39,7 +41,12 @@ class UsersController extends Controller
     {
         $user = User::find($id);
         if ($user != null) {
-            return response()->json(['data' => $user, 'status' => 'success'], 200);
+
+            $subs=DB::table('subs_user')
+                ->where('user_id', $user->id)
+                ->first();
+
+            return response()->json(['data' => $user,'active'=>$subs->active ,'status' => 'success'], 200);
         } else {
             return response()->json(['message' => 'User not found', 'status' => 'failed'], 404);
         }
